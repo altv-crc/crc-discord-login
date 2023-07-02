@@ -14,6 +14,10 @@ alt.log(`~c~[CRC] Discord Login Started`);
 
 alt.on('playerConnect', (player: alt.Player) => {
     loginRequest[player.id] = true;
+    player.dimension = player.id + 1;
+    player.visible = false;
+    player.frozen = true;
+    player.pos = new alt.Vector3(0, 0, 100);
     player.emit('crc-discord-login-request-auth');
 });
 
@@ -58,6 +62,7 @@ alt.onClient('crc-discord-login-bearer-token', async (player: alt.Player, bearer
     delete loginRequest[player.id];
 
     player.emit('crc-discord-login-done');
+    player.dimension = 0;
 
     await alt.Utils.waitFor(() => isDatabaseReady, 30000);
 

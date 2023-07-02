@@ -57,6 +57,10 @@ interface Account {
 }
 
 alt.on('crc-discord-login-finish', (player: alt.Player, account: Account) => {
-    // code goes here
+    player.frozen = false;
+    player.model = 'mp_m_freemode_01';
+    player.visible = true;
+    player.spawn(0, 0, 72);
+    console.log(account);
 });
 ```
