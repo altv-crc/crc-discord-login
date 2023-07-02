@@ -6,6 +6,7 @@ A simple discord authentication plugin.
 
 ## Requires
 
+- [crc-db](https://github.com/altv-crc/crc-db)
 - [alt:V TypeScript Project](https://github.com/Stuyk/altv-typescript)
 - [alt:V Cross Resource Cache](https://github.com/altv-crc/lib-cross-resource-cache)
 - [VSCode - alt:V Event Suggestions](https://marketplace.visualstudio.com/items?itemName=stuyk.altv-event-suggestions)
