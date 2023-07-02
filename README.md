@@ -14,11 +14,13 @@ _Highly recommended to get the extension, for better event handling._
 
 ## Installation
 
-1. Install NPM packages
+0. Install NPM packages
 
 ```ts
 npm i @stuyk/cross-resource-cache
 ```
+
+1. Install [crc-db resource](https://github.com/altv-crc/crc-db)
 
 2. Create a folder in your `src` folder called `crc-discord-login`.
 
