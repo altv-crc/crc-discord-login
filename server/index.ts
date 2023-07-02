@@ -1,8 +1,16 @@
 import * as alt from 'alt-server';
+import * as crc from '@stuyk/cross-resource-cache';
+import * as I from './interfaces';
+
+const COLLECTION_NAME = 'account';
+const loginRequest: { [id: string]: boolean } = {};
+let isDatabaseReady = false;
+
+crc.database.onReady(() => {
+    isDatabaseReady = true;
+});
 
 alt.log(`~c~[CRC] Discord Login Started`);
-
-const loginRequest: { [id: string]: boolean } = {};
 
 alt.on('playerConnect', (player: alt.Player) => {
     loginRequest[player.id] = true;
@@ -49,13 +57,22 @@ alt.onClient('crc-discord-login-bearer-token', async (player: alt.Player, bearer
 
     delete loginRequest[player.id];
 
-    // Just to give a little bit of 'reconnect' effect.
-    await alt.Utils.wait(1000);
-
-    alt.log(`Authenticated: ${data.username}`);
-
     player.emit('crc-discord-login-done');
 
-    // player: alt.Player, discord: string, username: string, discriminator: number
-    alt.emit('crc-discord-login-finish', player, data.id, data.username, data.discriminator);
+    await alt.Utils.waitFor(() => isDatabaseReady, 30000);
+
+    let account: I.Account = await crc.database.get<I.Account>({ id: data.id }, COLLECTION_NAME);
+    if (!account) {
+        const documentID = await crc.database.create<I.Account>(
+            { id: data.id, username: data.username, discriminator: data.discriminator },
+            COLLECTION_NAME
+        );
+
+        account = await crc.database.get<I.Account>({ _id: documentID }, COLLECTION_NAME);
+    } else {
+        alt.log(`Existing Account Authenticated - ${data.username}#${data.discriminator}`);
+    }
+
+    // player: alt.Player, account: { _id: string, discord: string, username: string, discriminator: number }
+    alt.emit('crc-discord-login-finish', player, account);
 });
