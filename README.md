@@ -33,6 +33,7 @@ In the case of the example above it should be `crc-discord-login`.
 
 ```
 resources = [ 
+    'crc-db',
     'crc-discord-login',
     'core',
     'dbg_reconnect'
