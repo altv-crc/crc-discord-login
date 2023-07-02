@@ -1,4 +1,4 @@
-# [TS] Discord Login
+# [CRC][TS] alt:V Discord Login
 
 <sup>Supported by <a href="https://github.com/orgs/altv-crc/">CRC</a></sup>
 
