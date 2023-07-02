@@ -6,23 +6,25 @@ A simple discord authentication plugin.
 
 ## Requires
 
-- TypeScript
-- https://github.com/Stuyk/altv-typescript
-- [alt:V Event Suggestions](https://marketplace.visualstudio.com/items?itemName=stuyk.altv-event-suggestions)
+- [alt:V TypeScript Project](https://github.com/Stuyk/altv-typescript)
+- [alt:V Cross Resource Cache](https://github.com/altv-crc/lib-cross-resource-cache)
+- [VSCode - alt:V Event Suggestions](https://marketplace.visualstudio.com/items?itemName=stuyk.altv-event-suggestions)
 
 _Highly recommended to get the extension, for better event handling._
 
 ## Installation
 
-* Create a folder in your `src` folder called `crc-discord-login`.
+1. Install NPM packages
 
-* Add the `TypeScript` files from this resource, to that folder.
+```ts
+npm i @stuyk/cross-resource-cache
+```
 
-_You can also `git clone` directly into your `src` folder._
+2. Create a folder in your `src` folder called `crc-discord-login`.
 
-## Setup
+3. Add the `TypeScript` files from this resource, to that folder.
 
-Modify `server.toml` and ensure it loads whatever you named the folder.
+4. Modify `server.toml` and ensure it loads whatever you named the folder.
 
 In the case of the example above it should be `crc-discord-login`.
 
@@ -34,14 +36,18 @@ resources = [
 ]
 ```
 
-## Listen to Event
+5. Listen for `crc-discord-login-finish` event.
 
 When a bearer token is passed from a `client` you will get general Discord information through an `alt.on` event.
 
+You should be listening to this event from some other resource.
+
 ```ts
 interface Account {
+    // MongoDB Document ID
     _id: string;
-    discord: string;
+    // Discord Data
+    id: string;
     username: string;
     discriminator: number;
 }
