@@ -5,7 +5,7 @@ import * as native from 'natives';
 // !! Remember to add `http://127.0.0.1` as a redirect for oAuth2
 const DISCORD_APP_ID = '1124918226757885995';
 
-alt.onServer('crc-discord-login-request-auth', async () => {
+alt.onceServer('crc-discord-login-request-auth', async () => {
     native.doScreenFadeOut(0);
 
     await alt.Utils.wait(1000);
@@ -27,7 +27,7 @@ alt.onServer('crc-discord-login-request-auth', async () => {
     }
 });
 
-alt.onServer('crc-discord-login-done', () => {
+alt.onceServer('crc-discord-login-done', () => {
     if (native.busyspinnerIsDisplaying()) {
         native.busyspinnerOff();
     }
