@@ -76,3 +76,14 @@ alt.onClient('crc-discord-login-bearer-token', async (player: alt.Player, bearer
     // player: alt.Player, account: { _id: string, discord: string, username: string, discriminator: number }
     alt.emit('crc-discord-login-finish', player, account);
 });
+
+interface Account {
+    _id: string;
+    discord: string;
+    username: string;
+    discriminator: number;
+}
+
+alt.on('crc-discord-login-finish', (player: alt.Player, account: Account) => {
+    // code goes here
+});

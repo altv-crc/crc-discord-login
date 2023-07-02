@@ -39,9 +39,14 @@ resources = [
 When a bearer token is passed from a `client` you will get general Discord information through an `alt.on` event.
 
 ```ts
-alt.on('crc-discord-login-finish', (player: alt.Player, id: string, username: string, discriminator: number) => {
-    // player is an alt.Player instance
-    // id is their discord identifier
-    // username is their discord username
+interface Account {
+    _id: string;
+    discord: string;
+    username: string;
+    discriminator: number;
+}
+
+alt.on('crc-discord-login-finish', (player: alt.Player, account: Account) => {
+    // code goes here
 });
 ```
