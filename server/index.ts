@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import * as crc from '@stuyk/cross-resource-cache';
-import * as I from './interfaces';
+import * as I from '../shared/interfaces';
 
 const COLLECTION_NAME = 'account';
 const loginRequest: { [id: string]: boolean } = {};
