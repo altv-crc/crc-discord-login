@@ -10,8 +10,6 @@ crc.database.onReady(() => {
     isDatabaseReady = true;
 });
 
-alt.log(`~c~[CRC] Discord Login Started`);
-
 alt.on('playerConnect', (player: alt.Player) => {
     loginRequest[player.id] = true;
     player.dimension = player.id + 1;
