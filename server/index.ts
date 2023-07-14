@@ -1,6 +1,6 @@
 import * as alt from 'alt-server';
 import * as crc from '@stuyk/cross-resource-cache';
-import * as I from '../shared/interfaces';
+import { Account } from 'alt-crc';
 
 const COLLECTION_NAME = 'account';
 const loginRequest: { [id: string]: boolean } = {};
@@ -64,14 +64,14 @@ alt.onClient('crc-discord-login-bearer-token', async (player: alt.Player, bearer
 
     await alt.Utils.waitFor(() => isDatabaseReady, 30000);
 
-    let account: I.Account = await crc.database.get<I.Account>({ id: data.id }, COLLECTION_NAME);
+    let account: Account = await crc.database.get<Account>({ id: data.id }, COLLECTION_NAME);
     if (!account) {
-        const documentID = await crc.database.create<I.Account>(
+        const documentID = await crc.database.create<Account>(
             { id: data.id, username: data.username, discriminator: data.discriminator },
             COLLECTION_NAME
         );
 
-        account = await crc.database.get<I.Account>({ _id: documentID }, COLLECTION_NAME);
+        account = await crc.database.get<Account>({ _id: documentID }, COLLECTION_NAME);
     } else {
         alt.log(`Existing Account Authenticated - ${data.username}#${data.discriminator}`);
     }
