@@ -1,8 +1,8 @@
 import * as alt from 'alt-server';
-import { Account } from '../shared/interfaces';
+import * as crc from 'alt-crc';
 
 declare module 'alt-server' {
     interface ICustomEmitEvent {
-        'crc-discord-login-finish': <T = Account>(player: alt.Player, account: T) => void;
+        'crc-discord-login-finish': <T = crc.Account>(player: alt.Player, account: T) => void;
     }
 }
